@@ -1,5 +1,7 @@
 body {
     background-image: url("../../src/documents/imgs/rhine.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .nav {
@@ -53,7 +55,6 @@ li {
 li:hover {
     text-decoration: underline;
     font-weight: bolder;
-    background-color: orange;
 }
 
 li span {

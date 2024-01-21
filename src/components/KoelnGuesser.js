@@ -5,6 +5,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import KGnavbar from "./KGnavbar";
 import Info from "./Info";
+import Home from "./Home";
+import Game from "./Game";
 
 
 const KoelnGuesser = () => {
@@ -13,8 +15,8 @@ const KoelnGuesser = () => {
             <Router>
                 <KGnavbar></KGnavbar>
                 <Routes>
-                    <Route path="/" element={<h1>Home</h1>}/>
-                    <Route path="/game" element={<h1>Game</h1>}/>
+                    <Route path="/" element={<Home></Home>}/>
+                    <Route path="/game" element={<Game></Game>}/>
                     <Route path="/info" element={<Info></Info>}/>
                 </Routes>
             </Router>

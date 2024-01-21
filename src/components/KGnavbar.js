@@ -1,16 +1,25 @@
-import React from "react";
-import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
-import "./KoelnGuesser.css";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min';
+import React, {useContext} from "react";
+import {Link} from "react-router-dom";
+import PlayerContext from "./PlayerContext";
+import {useScores} from "./GameContext";
 
 const KGnavbar = () => {
+
+    const {state} = useScores();
+
     return (
         <div>
-            <nav className="navbar navbar-expand-lg bg-body-tertiary">
+            <nav className="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
                 <div className="container-fluid">
                     <span className="navbar-brand">KölnGuesser</span>
-                    <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <span className="navbar-brand"> Hey
+                                {state.currentPlayer ? (
+                                    <span> {state.currentPlayer}</span>
+                                ) : (
+                                    <span> XXX</span>
+                                )}
+                    </span>
+                    <div className="collapse navbar-collapse" id="navbarNav">
                         <div className="navbar-nav">
                             <Link to="/" className="nav-link">Home</Link>
                             <Link to="/game" className="nav-link">Spielen</Link>
