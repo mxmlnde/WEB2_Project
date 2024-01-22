@@ -19,12 +19,6 @@ const AddScoreButton = () => {
     return (
         <div>
             <input
-                type="text"
-                value={playerName}
-                onChange={(e) => setPlayerName(e.target.value)}
-                placeholder="Spielername"
-            />
-            <input
                 type="number"
                 value={score}
                 onChange={(e) => setScore(parseInt(e.target.value))}

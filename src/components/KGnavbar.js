@@ -1,6 +1,5 @@
 import React, {useContext} from "react";
 import {Link} from "react-router-dom";
-import PlayerContext from "./PlayerContext";
 import {useScores} from "./GameContext";
 
 const KGnavbar = () => {
@@ -16,7 +15,7 @@ const KGnavbar = () => {
                                 {state.currentPlayer ? (
                                     <span> {state.currentPlayer}</span>
                                 ) : (
-                                    <span> XXX</span>
+                                    <span> ...</span>
                                 )}
                     </span>
                     <div className="collapse navbar-collapse" id="navbarNav">
