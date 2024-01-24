@@ -2,7 +2,7 @@ import React from 'react';
 import {useScores} from "./GameContext";
 
 const ScoreList = () => {
-    const { state } = useScores();
+    const {state} = useScores();
 
     if (state.scores.length === 0) {
         return <p>Noch keine Punktestände verfügbar.</p>;
@@ -10,14 +10,18 @@ const ScoreList = () => {
 
     return (
         <div>
-            <ul>
+
+            <ol>
                 {state.scores.map((score, index) => (
                     <li key={index}>
-                        {score.name}: {score.score} Punkte
+                <span className={`badge ${index === 0 ? 'bg-warning' : 'bg-secondary'}`}>
+                    {score.name}
+                </span>: {score.score} Punkte
                     </li>
                 ))}
-            </ul>
+            </ol>
         </div>
+
     );
 };
 

@@ -20,7 +20,7 @@ const Home = () => {
                 <div className="col-sm-6 mb-3 mb-sm-0">
                     <div className="card" style={{margin: '25px'}}>
                         <div className="card-body">
-                            <h5 className="card-title">Highscore</h5>
+                            <h5 className="card-title">Leaderboard</h5>
                             <ScoreList></ScoreList>
                         </div>
                     </div>

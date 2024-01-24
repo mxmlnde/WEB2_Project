@@ -21,7 +21,7 @@ const KGnavbar = () => {
                     <div className="collapse navbar-collapse" id="navbarNav">
                         <div className="navbar-nav">
                             <Link to="/" className="nav-link">Home</Link>
-                            <Link to="/game" className="nav-link">Spielen</Link>
+                            {/*<Link to="/game" className="nav-link">Spielen</Link>*/}
                             <Link to="/info" className="nav-link">Info</Link>
                         </div>
                     </div>
