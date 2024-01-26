@@ -73,7 +73,7 @@ const Info = () => {
                     }
 
 
-                    {aktuellerPegel && <p>Letzte Messung um {MEZPegel} mit {aktuellerPegel.value / 100} Meter</p>}
+                    {aktuellerPegel && <p>Letzte Messung um {MEZPegel} Uhr mit {aktuellerPegel.value / 100} Meter</p>}
                     <p className="card-text">Der Pegel Köln steht in der Kölner Altstadt-Nord am linken Rheinufer und
                         misst den Wasserstand des Rheins am Stromkilometer 688. Er ist einer von 22 Pegeln am Rhein.
                         Betrieben wird er vom Wasserstraßen- und Schifffahrtsamt Rhein. Pegel Köln mit mechanischer

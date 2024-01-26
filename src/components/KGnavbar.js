@@ -12,11 +12,11 @@ const KGnavbar = () => {
                 <div className="container-fluid">
                     <span className="navbar-brand">KölnGuesser</span>
                     <span className="navbar-brand"> Hey
-                                {state.currentPlayer ? (
-                                    <span> {state.currentPlayer}</span>
-                                ) : (
-                                    <span> ...</span>
-                                )}
+                        {state.currentPlayer ? (
+                            <span> {state.currentPlayer}</span>
+                        ) : (
+                            <span> ...</span>
+                        )}
                     </span>
                     <div className="collapse navbar-collapse" id="navbarNav">
                         <div className="navbar-nav">

@@ -1,17 +1,14 @@
 import React, {useEffect, useState} from 'react';
-// import img0 from "./imgs/dom.jpg";
-
 import ButtonAddScore from "./ButtonAddScore";
 import MyMap from "./MyMap";
-import {Link} from "react-router-dom";
 import locations from '../documents/locations.json';
+import NewMyMap from "./NewMyMap";
 
-const MapGame = () => {
-    const [randomPlace, setRandomPlace] = useState(locations.places[0]);
+const MapGame = ({location, updateGameScore, onNextRound}) => {
+    const [currentLocation, setCurrentLocation] = useState(locations.places[0]);
     useEffect(() => {
-        const randomIndex = Math.floor(Math.random() * locations.places.length);
-        setRandomPlace(locations.places[randomIndex]);
-    }, []);
+        setCurrentLocation(locations.places[location]);
+    }, [location]);
 
 
     const [submitState, setSubmitState] = useState(true);
@@ -19,46 +16,41 @@ const MapGame = () => {
         setSubmitState(!submitState);
     }
 
+    const nextRound = () => {
+        updateGameScore(10);
+        onNextRound();
+        setSubmitState(true);
+    }
+    const [posUserMarker, setPosUserMarker] = useState(null);
+    const handleUserMarkerPositionChange = (newPosition) => {
+        setPosUserMarker(newPosition);
+    };
+
+
     return (
         <div>
-            <div className="card text-center">
-                <div className="card-header">
-                    <ul className="nav nav-tabs card-header-tabs">
-                        <li className="nav-item">
-                            <span className="nav-link active" aria-current="true">Runde 1</span>
-                        </li>
-                        <li className="nav-item">
-                            <span className="nav-link ">Runde 2</span>
-                        </li>
-                        <li className="nav-item">
-                            <span className="nav-link disabled" aria-disabled="true">0 Punkte</span>
-                        </li>
-                    </ul>
-                </div>
-                <div className="card-body">
-                    <h5 className="card-title">Wo ist dieser Ort?</h5>
-                    <p className="card-text">
-                        <div className="container text-center">
-                            <div className="row">
-                                <div className="col">
-                                    <h5>{randomPlace.title}</h5>
-                                    <p>{randomPlace.description}</p>
-                                    <img src={require(`../documents${randomPlace.img}`)} alt={randomPlace.title}
-                                         style={{width: '600px'}}/>
-                                    <ButtonAddScore></ButtonAddScore>
-                                </div>
-                                <div className="col">
-                                    {submitState ?
-                                        <MyMap positionMarker={[50.93897590901401, 6.96552001490885]}></MyMap> :
-                                        <MyMap positionMarker={[randomPlace.lat, randomPlace.long]}></MyMap>}
-
-                                </div>
-                            </div>
+            <h5 className="card-title">Wo ist dieser Ort?</h5>
+            <p className="card-text">
+                <div className="container text-center">
+                    <div className="row">
+                        <div className="col">
+                            <h5>{currentLocation.title}</h5>
+                            <p>{currentLocation.description}</p>
+                            <img src={require(`../documents${currentLocation.img}`)} alt={currentLocation.title}
+                                 style={{width: '600px'}}/>
                         </div>
-                    </p>
-                    <Link href="#" className="btn btn-primary" onClick={toggleSubmitState}>BESTÄTIGEN</Link>
+                        <div className="col">
+                            {submitState ?
+                                <MyMap positionMarker={[50.93897590901401, 6.96552001490885]}></MyMap> :
+                                <MyMap positionMarker={[currentLocation.lat, currentLocation.long]}></MyMap>}
+
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </p>
+            {submitState ? <span className="btn btn-primary" onClick={toggleSubmitState}>BESTÄTIGEN</span> :
+                <span className="btn btn-primary" onClick={nextRound}>Nächste Runde</span>}
+
         </div>
     );
 };
