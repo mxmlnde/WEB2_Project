@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, Polyline, useMapEvents } from 'react-leaflet';
+import React, {useState} from 'react';
+import {MapContainer, TileLayer, Marker, Polyline, useMapEvents} from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerIconShadow from 'leaflet/dist/images/marker-shadow.png';
-import locations from '../documents/locations.json';
 
-const MyMap = ({ positionMarker, zoomFactor, onUserMarkerPositionChange, centerPos}) => {
-    const position = centerPos; // Default-Zentrum: Köln
+const NewMyMap = ({positionMarker, zoomFactor, onUserMarkerPositionChange, centerPos}) => {
+    const position = centerPos;
     const zoom = zoomFactor;
     const [userMarkerPosition, setUserMarkerPosition] = useState(null);
 
@@ -20,13 +19,11 @@ const MyMap = ({ positionMarker, zoomFactor, onUserMarkerPositionChange, centerP
         shadowSize: [41, 41]
     });
 
-    // Funktion, die auf Kartenklicks reagiert und einen Marker platziert
     const MapClickHandler = () => {
         useMapEvents({
             click: (e) => {
-                const { lat, lng } = e.latlng;
+                const {lat, lng} = e.latlng;
                 setUserMarkerPosition([lat, lng]);
-                // Rückgabe der Position des Benutzermarkers an die übergeordnete Komponente
                 if (onUserMarkerPositionChange) {
                     onUserMarkerPositionChange([lat, lng]);
                 }
@@ -36,19 +33,19 @@ const MyMap = ({ positionMarker, zoomFactor, onUserMarkerPositionChange, centerP
     };
 
     return (
-        <MapContainer center={position} zoom={zoom} style={{ height: '35vh' }}>
+        <MapContainer center={position} zoom={zoom} style={{height: '35vh'}}>
             <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             />
-            <MapClickHandler />
-            {positionMarker && <Marker position={positionMarker} icon={defaultIcon} />}
-            {userMarkerPosition && <Marker position={userMarkerPosition} icon={defaultIcon} />}
+            <MapClickHandler/>
+            {positionMarker && <Marker position={positionMarker} icon={defaultIcon}/>}
+            {userMarkerPosition && <Marker position={userMarkerPosition} icon={defaultIcon}/>}
             {positionMarker && userMarkerPosition && (
-                <Polyline positions={[positionMarker, userMarkerPosition]} color="red" />
+                <Polyline positions={[positionMarker, userMarkerPosition]} color="red"/>
             )}
         </MapContainer>
     );
 };
 
-export default MyMap;
+export default NewMyMap;

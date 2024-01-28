@@ -1,25 +1,22 @@
 import React, {createContext, useReducer, useContext} from 'react';
 
-// Initialer Zustand mit einem zusätzlichen Feld für den aktuellen Spieler
 const initialState = {
     scores: [],
-    currentPlayer: '' // Hinzufügen des aktuellen Spielers
+    currentPlayer: ''
 };
 
-// Context erstellen
 const ScoreContext = createContext(initialState);
 
-// Reducer-Funktion
 const scoreReducer = (state, action) => {
     switch (action.type) {
         case 'ADD_SCORE':
             const newScores = [...state.scores, action.payload];
-            newScores.sort((a, b) => b.score - a.score); // Absteigende Sortierung
+            newScores.sort((a, b) => b.score - a.score);
             return {
                 ...state,
                 scores: newScores
             };
-        case 'SET_CURRENT_PLAYER': // Aktion, um den aktuellen Spieler zu setzen
+        case 'SET_CURRENT_PLAYER':
             return {
                 ...state,
                 currentPlayer: action.payload
@@ -29,7 +26,6 @@ const scoreReducer = (state, action) => {
     }
 };
 
-// Provider-Komponente
 export const ScoreProvider = ({children}) => {
     const [state, dispatch] = useReducer(scoreReducer, initialState);
 
@@ -40,7 +36,6 @@ export const ScoreProvider = ({children}) => {
     );
 };
 
-// Hook, um Context zu verwenden
 export const useScores = () => {
     const context = useContext(ScoreContext);
     if (!context) {

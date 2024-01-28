@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useScores} from "./GameContext";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 
 const SetCurrentPlayer = () => {
@@ -10,7 +10,7 @@ const SetCurrentPlayer = () => {
 
 
     const handleSetCurrentPlayer = (e) => {
-        e.preventDefault(); // Verhindert das Standardverhalten des Formulars
+        e.preventDefault();
         dispatch({
             type: 'SET_CURRENT_PLAYER',
             payload: playerName

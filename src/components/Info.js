@@ -9,7 +9,6 @@ const Info = () => {
     const [lade, setLade] = useState(true);
     const [fehler, setFehler] = useState(null);
     const [aktuellerPegel, setAktuellerPegel] = useState(null);
-    const [bild, setBild] = useState(null);
     const imgURL = 'https://www.pegelonline.wsv.de/webservices/rest-api/v2/stations/a6ee8177-107b-47dd-bcfd-30960ccc6e9c/w/measurements.png';
     const [showJSON, setShowJSON] = useState(false);
 
@@ -82,7 +81,7 @@ const Info = () => {
                                 <div className="card-body text-secondary">
                                     <h5 className="card-title">{aktuellerPegel &&
                                         <p>Letzte Messung um {MEZPegel} Uhr
-                                            mit {aktuellerPegel.value / 100} Meter</p>}</h5>
+                                            mit {aktuellerPegel.value / 100} Metern</p>}</h5>
                                     <p className="card-text">Diagramm der Messwerte von
                                         letzten {pegelDaten.length} Messungen bzw. der letzten 10 Tage</p>
                                     <Button className="btn btn-primary"
@@ -98,7 +97,7 @@ const Info = () => {
                                     <p className="card-text">Der Pegel Köln steht in der Kölner Altstadt-Nord am linken
                                         Rheinufer und misst den Wasserstand des Rheins am Stromkilometer 688. Er ist
                                         einer von 22 Pegeln am Rhein. Betrieben wird er vom Wasserstraßen- und
-                                        Schifffahrtsamt Rhein. Pegel Köln mit mechanischer Pegeluhr.</p>
+                                        Schifffahrtsamt Rhein.</p>
                                 </div>
                             </div>
                         </div>

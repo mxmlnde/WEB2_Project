@@ -10,7 +10,6 @@ const ScoreList = () => {
 
     return (
         <div>
-
             <ol>
                 {state.scores.map((score, index) => (
                     <li key={index}>

@@ -74,7 +74,18 @@ const Game = () => {
                 <div className="card-body">
                     {currentRound === 4 ?
                         <div>
-                            <p> Es wurden {localGameScore} Punte erreicht</p>
+                            <p>
+                                <div className="progress" role="progressbar" aria-label="Example with label"
+                                     aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                    <div className="progress-bar progress-bar-striped progress-bar-animated"
+                                         style={{width: `${(localGameScore / rounds).toFixed(2)}%`}}>{localGameScore} Punkte
+                                    </div>
+
+                                </div>
+                            </p>
+
+                            <p> Du hast in den {rounds} Runden <b>{localGameScore}</b> von {rounds * 100} Punkten
+                                erreicht!</p>
                             <p><Link to="/" className="btn btn-primary" onClick={storeScore}>Zurück zum Anfang</Link>
                             </p>
                         </div> :

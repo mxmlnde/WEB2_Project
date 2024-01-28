@@ -1,6 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import ButtonAddScore from "./ButtonAddScore";
-import MyMap from "./MyMap";
 import locations from '../documents/locations.json';
 import NewMyMap from "./NewMyMap";
 
@@ -17,14 +15,10 @@ const MapGame = ({location, updateGameScore, onNextRound}) => {
     }
 
     const nextRound = () => {
-        updateGameScore(10);
+        updateGameScore(calculatePoints(userGuess, [currentLocation.lat, currentLocation.long]));
         onNextRound();
         setSubmitState(true);
     }
-    const [posUserMarker, setPosUserMarker] = useState(null);
-    const handleUserMarkerPositionChange = (newPosition) => {
-        setPosUserMarker(newPosition);
-    };
 
     const [userGuess, setUserGuess] = useState([0, 0])
 
@@ -41,15 +35,14 @@ const MapGame = ({location, updateGameScore, onNextRound}) => {
     }
 
     function calculatePoints(pos1, pos2) {
-        const maxDistance = 2; // Maximale Distanz für Punkte in km
+        const maxDistance = 1; // Maximale Distanz für Punkte in km
         const maxPoints = 100; // Maximale Punkteanzahl
 
-        const distance = calculateDistance(pos1[0], pos1[1], pos2[0], pos2[1]);
-        if (distance >= maxDistance) return 0; // Keine Punkte für Distanzen über 2 km
+        const distance = calculateDistance(pos1, pos2);
+        if (distance >= maxDistance) return 0;
 
-        // Punkteberechnung: Skalierung der Distanz zu Punkten, wobei 0 Punkte bei 2 km Distanz
         const points = (1 - distance / maxDistance) * maxPoints;
-        return Math.round(points); // Runden der Punkte auf die nächste ganze Zahl
+        return Math.round(points);
     }
 
     return (
@@ -57,10 +50,18 @@ const MapGame = ({location, updateGameScore, onNextRound}) => {
             <h5 className="card-title">Wo ist dieser Ort?</h5>
             <p className="card-text">
                 <div className="container text-center">
-                    <div className="row">
-                        <div className="col">
+                    <div className={"row"}>
+                        <div className={"col"}>
                             <h5>{currentLocation.title}</h5>
                             <p>{currentLocation.description}</p>
+                        </div>
+                        <div className={"col"}>
+
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col">
+
                             <img src={require(`../documents${currentLocation.img}`)} alt={currentLocation.title}
                                  style={{width: '600px'}}/>
                         </div>
@@ -73,15 +74,24 @@ const MapGame = ({location, updateGameScore, onNextRound}) => {
                                           positionMarker={[currentLocation.lat, currentLocation.long]}
                                           centerPos={[userGuess[0] - currentLocation.lat, userGuess[1] - currentLocation.long]}></NewMyMap>}
 
-                            <p>{calculatePoints(userGuess, currentLocation)}</p>
-
+                            {!submitState ? <p>
+                                    <div className="alert alert-success" role="alert">
+                                        Du
+                                        lagst {calculateDistance(userGuess, [currentLocation.lat, currentLocation.long]).toFixed(2)} Kilometer
+                                        daneben und
+                                        hast
+                                        damit {(calculatePoints(userGuess, [currentLocation.lat, currentLocation.long]))} Punkte
+                                        erreicht!
+                                    </div>
+                                </p>
+                                : null}
                         </div>
                     </div>
                 </div>
             </p>
             {
                 submitState ? <span className="btn btn-primary" onClick={toggleSubmitState}>BESTÄTIGEN</span> :
-                    <span className="btn btn-primary" onClick={nextRound}>Nächste Runde</span>
+                    <span className="btn btn-primary" onClick={nextRound}>{}Nächste Runde</span>
             }
         </div>
     )
