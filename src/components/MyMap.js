@@ -8,9 +8,9 @@ import markerIconShadow from 'leaflet/dist/images/marker-shadow.png';
 import locations from '../documents/locations.json';
 
 
-const MyMap = ({positionMarker}) => {
+const MyMap = ({positionMarker, zoomFactor}) => {
     const position = [50.93897590901401, 6.96552001490885]; // Köln 50.93897590901401, 6.96552001490885
-    const zoom = 13;
+    const zoom = zoomFactor;
 
     const defaultIcon = L.icon({
         iconUrl: markerIcon,
@@ -29,7 +29,7 @@ const MyMap = ({positionMarker}) => {
 
 
     return (
-        <MapContainer center={position} zoom={zoom} style={{height: '50dvh'}}>
+        <MapContainer center={position} zoom={zoom} style={{height: '35vh'}}>
             <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import {Button} from "react-bootstrap";
+import MyMap from "./MyMap";
 
 const Info = () => {
     const [pegelDaten, setPegelDaten] = useState([]);
@@ -49,37 +50,59 @@ const Info = () => {
     }) : '';
 
     return (
-        <div className="container-sm">
+        <div className="container" style={{margin: 'auto', marginTop: '25px'}}>
             <div className="card">
-                <div className="card-img-top">
-                    <img src={imgURL} alt={"Bild"}/>
+                <div className="card-header">
+                    Pegelstand Rhein: <b>Köln</b> Kilometer 688
                 </div>
                 <div className="card-body">
-                    <h5 className="card-title">Pegelstand Rhein: <b>Köln</b> Kilometer 688</h5>
-                    {
-                        aktuellerPegel.value >= 620 && aktuellerPegel.value < 830 ?
-                            <div className="alert alert-warning" role="alert">
-                                <b>Hochwassermarke 1: </b>
-                                Schiffe dürfen nur noch mit verminderter Geschwindigkeit und im mittleren
-                                Stromdrittel fahren.
-                            </div>
-                            :
-                            aktuellerPegel.value >= 830 ?
-                                <div className="alert alert-danger" role="alert">
-                                    <b>Hochwassermarke 2: </b>
-                                    Der Schiffsverkehr ist gesperrt.
+                    <div className={"row"}>
+                        {
+                            aktuellerPegel.value >= 620 && aktuellerPegel.value < 830 ?
+                                <div className="alert alert-warning" role="alert">
+                                    <b>Hochwassermarke 1: </b>
+                                    Schiffe dürfen nur noch mit verminderter Geschwindigkeit und im
+                                    mittleren
+                                    Stromdrittel fahren.
                                 </div>
-                                : null
-                    }
-
-
-                    {aktuellerPegel && <p>Letzte Messung um {MEZPegel} Uhr mit {aktuellerPegel.value / 100} Meter</p>}
-                    <p className="card-text">Der Pegel Köln steht in der Kölner Altstadt-Nord am linken Rheinufer und
-                        misst den Wasserstand des Rheins am Stromkilometer 688. Er ist einer von 22 Pegeln am Rhein.
-                        Betrieben wird er vom Wasserstraßen- und Schifffahrtsamt Rhein. Pegel Köln mit mechanischer
-                        Pegeluhr.</p>
-                    <Button className="btn btn-primary"
-                            onClick={toggleJSON}>{showJSON ? "JSON verbergen" : "JSON anzeigen"}</Button>
+                                :
+                                aktuellerPegel.value >= 830 ?
+                                    <div className="alert alert-danger" role="alert">
+                                        <b>Hochwassermarke 2: </b>
+                                        Der Schiffsverkehr ist gesperrt.
+                                    </div>
+                                    : null
+                        }
+                    </div>
+                    <div className={"row"}>
+                        <div className={"col"}>
+                            <div className="card border-secondary mb-3">
+                                <div className="card-header">Daten</div>
+                                <img src={imgURL} alt={"Diagramm Pegel"}/>
+                                <div className="card-body text-secondary">
+                                    <h5 className="card-title">{aktuellerPegel &&
+                                        <p>Letzte Messung um {MEZPegel} Uhr
+                                            mit {aktuellerPegel.value / 100} Meter</p>}</h5>
+                                    <p className="card-text">Diagramm der Messwerte von
+                                        letzten {pegelDaten.length} Messungen bzw. der letzten 10 Tage</p>
+                                    <Button className="btn btn-primary"
+                                            onClick={toggleJSON}>{showJSON ? "JSON verbergen" : "JSON anzeigen"}</Button>
+                                </div>
+                            </div>
+                        </div>
+                        <div className={"col"}>
+                            <div className="card border-secondary mb-3">
+                                <div className="card-header">Position Messstation</div>
+                                <MyMap positionMarker={[50.93696685528609, 6.9632878331846655]} zoomFactor={15}></MyMap>
+                                <div className="card-body text-secondary">
+                                    <p className="card-text">Der Pegel Köln steht in der Kölner Altstadt-Nord am linken
+                                        Rheinufer und misst den Wasserstand des Rheins am Stromkilometer 688. Er ist
+                                        einer von 22 Pegeln am Rhein. Betrieben wird er vom Wasserstraßen- und
+                                        Schifffahrtsamt Rhein. Pegel Köln mit mechanischer Pegeluhr.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <div className={showJSON ? "modal fade show" : "modal fade"}
                          style={showJSON ? {display: "block"} : {display: "none"}} tabIndex="-1">

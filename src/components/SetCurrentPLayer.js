@@ -15,7 +15,7 @@ const SetCurrentPlayer = () => {
             type: 'SET_CURRENT_PLAYER',
             payload: playerName
         });
-        navigate('/game'); // Navigiert zur Spiel-Seite
+        navigate('/game');
     };
 
 
@@ -29,7 +29,7 @@ const SetCurrentPlayer = () => {
                 <div id="emailHelp" className="form-text">Du kannst auch deine alten Benutzernamen
                     nutzen.
                 </div>
-                <button type="submit" className="btn btn-primary">
+                <button type="submit" className="btn btn-primary" style={{marginTop: '10px'}}>
                     Spiel starten
                 </button>
 
